@@ -19,19 +19,6 @@ services:
       - frontend
     restart: unless-stopped
 
-  mantrae-agent:
-    image: ghcr.io/mizuchilabs/mantrae-agent:latest
-    container_name: mantrae-agent
-    networks:
-      - frontend
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - TOKEN=${MANTRAE_AGENT_TOKEN}
-      - SERVER_URL=http://mantrae
-      - SERVER_HOST=mantrae
-    restart: unless-stopped
-
   traefik:
     image: traefik:v3.1.5
     container_name: traefik
