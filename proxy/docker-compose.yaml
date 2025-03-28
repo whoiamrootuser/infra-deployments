@@ -4,8 +4,6 @@ services:
   mantrae:
     image: ghcr.io/mizuchilabs/mantrae:latest
     container_name: mantrae
-    ports:
-      - 5889:3000
     volumes:
       - ./mantrae:/data
     environment:
@@ -16,6 +14,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.mantrae.rule=Host(`mantrae.${HOST}`)
+      - traefik.http.services.mantrae.loadbalancer.server.port=3000
     networks:
       - frontend
     restart: unless-stopped
