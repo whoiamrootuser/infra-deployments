@@ -14,7 +14,6 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.mantrae.rule=Host(`mantrae.${HOST}`)
-      - traefik.http.services.mantrae.loadbalancer.server.port=3000
     networks:
       - frontend
     restart: unless-stopped
