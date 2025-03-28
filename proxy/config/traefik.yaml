@@ -1,47 +1,29 @@
----
 global:
   checkNewVersion: false
   sendAnonymousUsage: false
-
-# --> (Optional) Change log level and format here ...
-#     - level: [TRACE, DEBUG, INFO, WARN, ERROR, FATAL]
 log:
-  level: "INFO"
-# <--
-
-# --> (Optional) Enable accesslog here ...
-# accesslog: {}
-# <--
-
-# --> (Optional) Enable API and Dashboard here, don't do in production
+  level: DEBUG
 api:
    dashboard: true
    insecure: true
-# <--
-
-# -- Change EntryPoints here...
 entryPoints:
   web:
     address: :80
-    # --> (Optional) Redirect all HTTP to HTTPS
     http:
       redirections:
         entryPoint:
           to: websecure
           scheme: https
-    
   websecure:
     address: :443
-
-# -- Configure your CertificateResolver here...
 certificatesResolvers:
   cloudflare:
     acme:
-      email: ${OWNER_EMAIL}  # <-- Change this to your email
+      email: ${OWNER_EMAIL}
       storage: /var/traefik/certs/cloudflare-acme.json
       caServer: "https://acme-v02.api.letsencrypt.org/directory"
       dnsChallenge:
-        provider: cloudflare  # <-- (Optional) Change this to your DNS provider
+        provider: cloudflare
         resolvers:
           - "1.1.1.1:53"
           - "8.8.8.8:53"

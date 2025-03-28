@@ -3,15 +3,13 @@ services:
   traefik:
     image: traefik:v3.1.5
     container_name: traefik
-    command:
-      - --api.insecure=true --providers.docker
     ports:
       - 80:80
       - 443:443
       - 8080:8080
     volumes:
       - /var/run/docker.sock:/run/docker.sock:ro
-      - ./config/:/etc/traefik/:ro
+      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
       - ./certs/:/var/traefik/certs/:rw
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
@@ -22,4 +20,4 @@ services:
 
 networks:
   frontend:
-    external: false  # <-- (Optional) Change this to false if you want to create a new network
+    external: true  # <-- (Optional) Change this to false if you want to create a new network
