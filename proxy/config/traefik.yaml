@@ -35,12 +35,12 @@ providers:
     directory: /etc/traefik
     watch: true
   http:
-    endpoint: "http://mantrae:3000/api/${MANTAE_PROFILE}"
+    endpoint: "http://mantrae:3000/api/traefik-default"
 
 http:
   routers:
     dashboard:
-      rule: "Host(`traefik.${HOST}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      rule: "Host(`traefik.testespace.com.br`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       service: api@internal
       entryPoints:
         - websecure
