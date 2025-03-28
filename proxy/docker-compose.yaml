@@ -11,8 +11,6 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - SECRET=${SECRET}
       - HOST=${HOST}
-    ports:
-      - 3000:3000
     labels:
       - traefik.enable=true
       - traefik.http.routers.mantrae.rule=Host(`mantrae.testespace.com.br`)
@@ -23,26 +21,12 @@ services:
       - frontend
     restart: unless-stopped
 
-  mantrae-agent:
-    image: ghcr.io/mizuchilabs/mantrae-agent:v0.5.3
-    container_name: mantrae-agent
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # needed if running as container
-    environment:
-      - TOKEN=${MANTRAE_AGENT_TOKEN} # token from mantrae server
-      - SERVER_URL=${MANTRAE_SERVER_URL} # url of the mantrae server
-    # adjust network which you want to monitor
-    networks:
-      - frontend
-    restart: unless-stopped
-
   traefik:
     image: traefik:v3.1.5
     container_name: traefik
     ports:
       - 80:80
       - 443:443
-      - 8080:8080
     volumes:
       - /var/run/docker.sock:/run/docker.sock:ro
       - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
