@@ -34,6 +34,9 @@ providers:
   file:
     directory: /etc/traefik
     watch: true
+  http:
+    endpoint: "http://mantrae:3000/api/${MANTAE_PROFILE}"
+
 http:
   routers:
     dashboard:
