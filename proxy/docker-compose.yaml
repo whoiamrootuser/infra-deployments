@@ -2,7 +2,7 @@
 services:
 
   mantrae:
-    image: ghcr.io/mizuchilabs/mantrae:latest
+    image: ghcr.io/mizuchilabs/mantrae:v0.5.3
     container_name: mantrae
     volumes:
       - ./mantrae:/data
@@ -24,7 +24,7 @@ services:
     restart: unless-stopped
 
   mantrae-agent:
-    image: ghcr.io/mizuchilabs/mantrae-agent:latest
+    image: ghcr.io/mizuchilabs/mantrae-agent:v0.5.3
     container_name: mantrae-agent
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # needed if running as container
