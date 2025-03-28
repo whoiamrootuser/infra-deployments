@@ -14,7 +14,6 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.mantrae.rule=Host(`mantrae.${HOST}`)
-      - traefik.http.services.mantrae.loadbalancer.server.port=3000
     networks:
       - frontend
     restart: unless-stopped
@@ -38,13 +37,6 @@ services:
       - MANTAE_PROFILE=${MANTAE_PROFILE}
     networks:
       - frontend
-    command:
-      - --providers.http.endpoint=http://mantrae:3000/api/${MANTAE_PROFILE}
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.dashboard.rule=Host(`traefik.${HOST}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
-      - traefik.http.routers.dashboard.service=api@internal
-      - traefik.http.routers.dashboard.entrypoints=websecure
     restart: unless-stopped
 
 networks:

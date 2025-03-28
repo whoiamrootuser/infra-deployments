@@ -33,3 +33,15 @@ providers:
   file:
     directory: /etc/traefik
     watch: true
+  http:
+    endpoint: "http://mantrae:3000/api/traefik-default"
+
+http:
+  routers:
+    dashboard:
+      rule: "Host(`traefik.testespace.com.br`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      service: api@internal
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: cloudflare
