@@ -19,7 +19,7 @@ entryPoints:
 certificatesResolvers:
   cloudflare:
     acme:
-      email: ${OWNER_EMAIL}
+      email: whoiamrootuser@proton.me
       storage: /var/traefik/certs/cloudflare-acme.json
       caServer: "https://acme-v02.api.letsencrypt.org/directory"
       dnsChallenge:
