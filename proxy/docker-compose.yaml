@@ -22,6 +22,8 @@ services:
   mantrae-agent:
     image: ghcr.io/mizuchilabs/mantrae-agent:latest
     container_name: mantrae-agent
+    networks:
+      - frontend
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
