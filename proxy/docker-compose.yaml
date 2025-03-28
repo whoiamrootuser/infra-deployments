@@ -16,7 +16,7 @@ services:
       - traefik.http.routers.mantrae.rule=Host(`mantrae.testespace.com.br`)
       - traefik.http.routers.mantrae.entrypoints=websecure
       - traefik.http.routers.mantrae.tls.certresolver=cloudflare
-      - traefik.http.services.mantrae.loadbalancer.server.url=http://mantrae:3000
+      - traefik.http.services.mantrae.loadbalancer.server.port=3000
     networks:
       - frontend
     restart: unless-stopped
