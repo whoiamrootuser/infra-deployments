@@ -17,7 +17,21 @@ services:
       - traefik.enable=true
       - traefik.http.routers.mantrae.rule=Host(`mantrae.testespace.com.br`)
       - traefik.http.routers.mantrae.entrypoints=websecure
-      - traefik.http.services.mantrae.loadbalancer.server.port=3000
+      - traefik.http.routers.mantrae.tls.certresolver=cloudflare
+      - traefik.http.services.mantrae.loadbalancer.server.url=http://mantrae:3000
+    networks:
+      - frontend
+    restart: unless-stopped
+
+  mantrae-agent:
+    image: ghcr.io/mizuchilabs/mantrae-agent:latest
+    container_name: mantrae-agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # needed if running as container
+    environment:
+      - TOKEN=${MANTRAE_AGENT_TOKEN} # token from mantrae server
+      - SERVER_URL=${MANTRAE_SERVER_URL} # url of the mantrae server
+    # adjust network which you want to monitor
     networks:
       - frontend
     restart: unless-stopped
