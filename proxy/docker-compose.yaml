@@ -11,6 +11,8 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - SECRET=${SECRET}
       - HOST=${HOST}
+    ports:
+      - 3000:3000
     labels:
       - traefik.enable=true
       - traefik.http.routers.mantrae.rule=Host(`mantrae.testespace.com.br`)
