@@ -1,5 +1,34 @@
 ---
 services:
+
+  mantrae:
+    image: ghcr.io/mizuchilabs/mantrae:latest
+    container_name: mantrae
+    ports:
+      - 5889:3000
+    volumes:
+      - ./mantrae:/data
+    environment:
+      - TRAEKIF_URL=${TRAEKIF_URL}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - SECRET=${SECRET}
+      - HOST=${HOST}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mantrae.rule=Host(`mantrae.${HOST}`)
+    networks:
+      - frontend
+    restart: unless-stopped
+
+  mantrae-agent:
+    image: ghcr.io/mizuchilabs/mantrae-agent:latest
+    container_name: mantrae-agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TOKEN=${MANTRAE_AGENT_TOKEN}
+    restart: unless-stopped
+
   traefik:
     image: traefik:v3.1.5
     container_name: traefik
@@ -11,9 +40,11 @@ services:
       - /var/run/docker.sock:/run/docker.sock:ro
       - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
       - ./certs/:/var/traefik/certs/:rw
+      - ./traefik:/etc/traefik
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
       - OWNER_EMAIL=${OWNER_EMAIL}
+      - HOST=${HOST}
     networks:
       - frontend
     restart: unless-stopped
