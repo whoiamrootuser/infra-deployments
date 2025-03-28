@@ -28,6 +28,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TOKEN=${MANTRAE_AGENT_TOKEN}
+      - SERVER_URL=http://mantrae:3000
     restart: unless-stopped
 
   traefik:
