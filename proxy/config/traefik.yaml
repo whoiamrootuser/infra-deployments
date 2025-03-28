@@ -34,7 +34,9 @@ providers:
     directory: /etc/traefik
     watch: true
   http:
-    endpoint: "http://mantrae:3000/api/traefik-default"
+    endpoint: "http://mantrae:3000/api/default"
+    headers:
+        Authorization: Basic YWRtaW46Y2YwZmIwNmQ4MDQ1MTc3ODNjYjBlZDBkYjY0MzAyNTE5NWI4
 
 http:
   routers:
