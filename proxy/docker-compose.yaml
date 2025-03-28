@@ -13,6 +13,7 @@ services:
       - ./certs/:/var/traefik/certs/:rw
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+      - OWNER_EMAIL=${OWNER_EMAIL}
     networks:
       - frontend
     restart: unless-stopped
