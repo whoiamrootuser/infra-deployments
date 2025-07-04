@@ -53,7 +53,7 @@ services:
       - "traefik.http.routers.portainer.rule=Host(`portainer.testespace.com.br`)"
       - "traefik.http.routers.portainer.entrypoints=websecure"
       - "traefik.http.routers.portainer.tls.certresolver=cloudflare"
-      - "traefik.http.services.portainer.loadbalancer.server.port=9443"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
     networks:
       - frontend
 
