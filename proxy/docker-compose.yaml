@@ -54,6 +54,8 @@ services:
       - "traefik.http.routers.portainer.entrypoints=websecure"
       - "traefik.http.routers.portainer.tls.certresolver=cloudflare"
       - "traefik.http.services.portainer.loadbalancer.server.port=9443"
+    networks:
+      - frontend
 
 volumes:
   portainer_data:
