@@ -40,24 +40,6 @@ services:
     networks:
       - frontend
     restart: unless-stopped
-  
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.testespace.com.br`)"
-      - "traefik.http.routers.portainer.entrypoints=websecure"
-      - "traefik.http.routers.portainer.tls.certresolver=cloudflare"
-      - "traefik.http.services.portainer.loadbalancer.server.port=9443"
-
-volumes:
-  portainer_data:
-    external: true
 
 
 networks:
